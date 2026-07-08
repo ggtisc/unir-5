@@ -35,11 +35,11 @@ resource "aws_security_group" "ec2_sg" {
   dynamic "ingress" {
     for_each = var.app_ports
     content {
-      description      = "Allow application traffic from the ALB security group"
-      from_port        = ingress.value
-      to_port          = ingress.value
-      protocol         = "tcp"
-      security_groups  = [aws_security_group.alb_sg.id]
+      description     = "Allow application traffic from the ALB security group"
+      from_port       = ingress.value
+      to_port         = ingress.value
+      protocol        = "tcp"
+      security_groups = [aws_security_group.alb_sg.id]
     }
   }
 
