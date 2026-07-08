@@ -1,0 +1,1 @@
+# Module resources test with hardcoded values
