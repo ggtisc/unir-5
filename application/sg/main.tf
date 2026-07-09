@@ -25,6 +25,10 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
+
+  tags = {
+    Name = "alb-sg-iaas-1"
+  }
 }
 
 resource "aws_security_group" "ec2_sg" {
@@ -50,5 +54,9 @@ resource "aws_security_group" "ec2_sg" {
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "ec2-sg-iaas-1"
   }
 }

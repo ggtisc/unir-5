@@ -11,7 +11,12 @@ variable "route_table_internet_gateway_id" {
 }
 
 variable "route_table_public_subnet_ids" {
-  description = "List of public subnet IDs to associate with the route table"
+  description = "List of public subnet IDs to associate with the public route table"
+  type        = list(string)
+}
+
+variable "route_table_private_subnet_ids" {
+  description = "List of private subnet IDs to associate with private route tables"
   type        = list(string)
 }
 

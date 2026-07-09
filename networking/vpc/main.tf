@@ -2,5 +2,7 @@
 
 resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr_block
-  tags       = var.vpc_tags
+  tags = merge(var.vpc_tags, {
+    Name = "vpc-iaas-1"
+  })
 }

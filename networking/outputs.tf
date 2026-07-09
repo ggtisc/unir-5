@@ -31,7 +31,12 @@ output "internet_gateway_id" {
 # Route Table outputs
 output "route_table_id" {
   value       = module.route_table_00001.route_table_id
-  description = "Route Table id"
+  description = "Public Route Table id"
+}
+
+output "private_route_table_ids" {
+  value       = module.route_table_00001.private_route_table_ids
+  description = "IDs of the private Route Tables"
 }
 
 # VPC Endpoint outputs

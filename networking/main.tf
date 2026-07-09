@@ -23,7 +23,7 @@ module "internet_gateway_00001" {
   source                  = "./internet_gateway"
   internet_gateway_vpc_id = module.vpc_00001.vpc_id
   internet_gateway_tags   = var.internet_gateway_tags
-  depends_on              = [ module.vpc_00001 ]
+  depends_on              = [module.vpc_00001]
 }
 
 # Route Table Module
@@ -32,6 +32,7 @@ module "route_table_00001" {
   route_table_vpc_id              = module.vpc_00001.vpc_id
   route_table_internet_gateway_id = module.internet_gateway_00001.internet_gateway_id
   route_table_public_subnet_ids   = module.subnets_00001.public_subnet_ids
+  route_table_private_subnet_ids  = module.subnets_00001.private_subnet_ids
   route_table_tags                = var.route_table_tags
   depends_on                      = [module.subnets_00001, module.internet_gateway_00001]
 }

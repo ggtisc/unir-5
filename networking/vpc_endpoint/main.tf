@@ -5,7 +5,9 @@ resource "aws_vpc_endpoint" "vpc_endpoint" {
   service_name      = var.service_name
   vpc_endpoint_type = "Gateway"
   route_table_ids   = var.route_table_ids
-  tags              = var.vpc_endpoint_tags
+  tags = merge(var.vpc_endpoint_tags, {
+    Name = "vpc-endpoint-iaas-1"
+  })
 }
 
 # Associate the gateway endpoint with provided route tables
