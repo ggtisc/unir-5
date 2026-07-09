@@ -19,3 +19,10 @@ module "nat_gw" {
   private_route_table_ids = data.terraform_remote_state.networking.outputs.private_route_table_ids
   depends_on              = [module.sg]
 }
+
+# S3 Module
+# Storage for application assets and ALB access logs
+module "s3" {
+  source            = "./s3"
+  bucket_base_name  = "app-bucket-iaas"
+}

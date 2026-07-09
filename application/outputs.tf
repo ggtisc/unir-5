@@ -27,3 +27,14 @@ output "nat_eip_public_ips" {
   value       = module.nat_gw.nat_eip_public_ips
   description = "Public IP addresses of the Elastic IPs for NAT Gateways"
 }
+
+# S3 Module Outputs
+output "app_bucket_id" {
+  value       = module.s3.bucket_id
+  description = "Name of the S3 bucket generated with the random suffix"
+}
+
+output "app_bucket_arn" {
+  value       = module.s3.bucket_arn
+  description = "ARN of the S3 bucket"
+}
