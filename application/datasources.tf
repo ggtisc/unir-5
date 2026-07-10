@@ -6,3 +6,13 @@ data "terraform_remote_state" "networking" {
     path = "../networking/terraform.tfstate"
   }
 }
+
+# data "aws_ami" "latest_golden_image" {
+#   most_recent = true
+#   owners      = ["self"] # Solo busca AMIs creadas en tu cuenta
+
+#   filter {
+#     name   = "name"
+#     values = ["golden-image-nginx-*"] # El patrón de nombre que usa tu Packer
+#   }
+# }

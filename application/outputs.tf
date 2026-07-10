@@ -18,15 +18,15 @@ output "instance_profile_name" {
 }
 
 # NAT Gateway Module Outputs
-# output "nat_gateway_ids" {
-#   value       = module.nat_gw.nat_gateway_ids
-#   description = "IDs of the created NAT Gateways"
-# }
+output "nat_gateway_ids" {
+  value       = module.nat_gw.nat_gateway_ids
+  description = "IDs of the created NAT Gateways"
+}
 
-# output "nat_eip_public_ips" {
-#   value       = module.nat_gw.nat_eip_public_ips
-#   description = "Public IP addresses of the Elastic IPs for NAT Gateways"
-# }
+output "nat_eip_public_ips" {
+  value       = module.nat_gw.nat_eip_public_ips
+  description = "Public IP addresses of the Elastic IPs for NAT Gateways"
+}
 
 # S3 Module Outputs
 output "app_bucket_id" {
@@ -53,4 +53,10 @@ output "alb_dns_name" {
 output "target_group_arn" {
   value       = module.alb.target_group_arn
   description = "ARN of the ALB target group"
+}
+
+# ASG Module Outputs
+output "asg_name" {
+  value       = module.asg.asg_name
+  description = "Name of the Auto Scaling Group"
 }
