@@ -54,3 +54,11 @@ module "waf" {
   source  = "./waf"
   alb_arn = module.alb.alb_arn
 }
+
+# ACL Module
+module "acl" {
+  source             = "./acl"
+  vpc_id             = data.terraform_remote_state.networking.outputs.vpc_id
+  public_subnet_ids  = data.terraform_remote_state.networking.outputs.public_subnets
+  private_subnet_ids = data.terraform_remote_state.networking.outputs.private_subnets
+}
