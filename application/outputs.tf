@@ -60,3 +60,9 @@ output "asg_name" {
   value       = module.asg.asg_name
   description = "Name of the Auto Scaling Group"
 }
+
+# WAF Module Outputs
+output "waf_arn" {
+  value       = module.waf.waf_arn
+  description = "ARN of the WAF Web ACL"
+}

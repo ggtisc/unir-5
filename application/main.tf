@@ -48,3 +48,9 @@ module "asg" {
   ami_id                    = "ami-088b41ffb0933423f"
   instance_type             = "t3.micro"
 }
+
+# WAF Module
+module "waf" {
+  source  = "./waf"
+  alb_arn = module.alb.alb_arn
+}
