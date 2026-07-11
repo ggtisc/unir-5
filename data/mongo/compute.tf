@@ -26,7 +26,7 @@ resource "aws_launch_template" "mongo_lt" {
     name = aws_iam_instance_profile.mongo_profile[count.index].name
   }
 
-  user_data = filebase64("${path.module}/scripts/init-mongo.sh")
+  user_data = base64encode(templatefile("${path.module}/scripts/init-mongo.sh", { SERVICE_ID = var.cloudmap_service_id }))
 
   tag_specifications {
     resource_type = "instance"

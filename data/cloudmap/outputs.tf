@@ -1,0 +1,7 @@
+output "service_id" {
+  value = aws_service_discovery_service.mongo.id
+}
+
+output "namespace_id" {
+  value = aws_service_discovery_private_dns_namespace.internal.id
+}

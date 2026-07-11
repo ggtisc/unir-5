@@ -55,6 +55,11 @@ output "target_group_arn" {
   description = "ARN of the ALB target group"
 }
 
+# SSM Module Outputs
+output "app_ami_ssm_parameter" {
+  value = module.ssm.parameter_name
+}
+
 # ASG Module Outputs
 output "asg_name" {
   value       = module.asg.asg_name

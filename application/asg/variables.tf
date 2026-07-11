@@ -1,6 +1,5 @@
-variable "ami_id" {
-  description = "AMI ID to use for the launch template"
-  type        = string
+variable "ssm_parameter_name" {
+  type = string
 }
 
 variable "instance_type" {

@@ -14,3 +14,7 @@ variable "instance_type" {
   type    = string
   default = "t3.medium"
 }
+
+variable "cloudmap_service_id" {
+  type = string
+}

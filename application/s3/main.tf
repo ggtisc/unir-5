@@ -14,6 +14,7 @@ data "aws_elb_service_account" "main" {
 # Application S3 bucket for assets and ALB access logs
 resource "aws_s3_bucket" "app_bucket" {
   bucket = "${var.bucket_base_name}-${random_id.bucket_suffix.hex}"
+  force_destroy = true
 
   tags = {
     Name = "app-bucket-iaas-1"

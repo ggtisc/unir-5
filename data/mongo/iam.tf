@@ -49,6 +49,17 @@ resource "aws_iam_role_policy" "mongo_policy" {
             "aws:ResourceTag/MongoNode" = tostring(count.index + 1)
           }
         }
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "servicediscovery:RegisterInstance",
+          "servicediscovery:DeregisterInstance",
+          "servicediscovery:DiscoverInstances",
+          "servicediscovery:GetInstancesHealthStatus",
+          "servicediscovery:GetInstance"
+        ]
+        Resource = "*"
       }
     ]
   })

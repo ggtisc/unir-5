@@ -38,6 +38,11 @@ module "alb" {
   depends_on             = [module.s3]
 }
 
+module "ssm" {
+  source         = "./ssm"
+  initial_ami_id = "ami-088b41ffb0933423f"
+}
+
 # ASG Module
 module "asg" {
   source                    = "./asg"
@@ -45,8 +50,8 @@ module "asg" {
   ec2_sg_id                 = module.sg.ec2_sg_id
   iam_instance_profile_name = module.iam.instance_profile_name
   target_group_arn          = module.alb.target_group_arn
-  ami_id                    = "ami-088b41ffb0933423f"
   instance_type             = "t3.micro"
+  ssm_parameter_name = module.ssm.parameter_name
 }
 
 # WAF Module
