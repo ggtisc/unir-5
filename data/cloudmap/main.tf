@@ -19,4 +19,13 @@ resource "aws_service_discovery_service" "mongo" {
   }
 
   health_check_custom_config {}
+
+  provisioner "local-exec" {
+    when    = destroy
+    command = <<EOT
+      for id in $(aws servicediscovery list-instances --service-id ${self.id} --query 'Instances[*].Id' --output text 2>/dev/null); do
+        aws servicediscovery deregister-instance --service-id ${self.id} --instance-id $id
+      done
+    EOT
+  }
 }

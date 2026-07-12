@@ -1,35 +1,18 @@
-data "aws_ami" "ubuntu" {
-  most_recent = true
-  owners      = ["099720109477"]
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
-
 resource "aws_launch_template" "mongo_lt" {
-  count         = 3
-  name_prefix   = "mongo-lt-${count.index + 1}-"
-  image_id      = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
-
+  count                  = 3
+  name_prefix            = "mongo-lt-${count.index + 1}-"
+  image_id               = "resolve:ssm:${var.ssm_parameter_name}"
+  instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.mongo_sg.id]
+  user_data              = base64encode(templatefile("${path.module}/scripts/init-mongo.sh", { SERVICE_ID = var.cloudmap_service_id }))
 
   iam_instance_profile {
-    # Asigna el perfil de IAM exacto para este nodo
     name = aws_iam_instance_profile.mongo_profile[count.index].name
   }
 
-  user_data = base64encode(templatefile("${path.module}/scripts/init-mongo.sh", { SERVICE_ID = var.cloudmap_service_id }))
-
   tag_specifications {
     resource_type = "instance"
+
     tags = {
       Name = "mongo-${count.index + 1}"
     }
@@ -37,8 +20,7 @@ resource "aws_launch_template" "mongo_lt" {
 }
 
 resource "aws_autoscaling_group" "mongo_asg" {
-  count = 3
-
+  count                     = 3
   name                      = "mongo-asg-${count.index + 1}"
   vpc_zone_identifier       = [var.private_subnet_ids[count.index]]
   min_size                  = 1
@@ -48,9 +30,15 @@ resource "aws_autoscaling_group" "mongo_asg" {
   health_check_grace_period = 300
 
   launch_template {
-    # Enlaza el ASG con su Launch Template específico
     id      = aws_launch_template.mongo_lt[count.index].id
     version = "$Latest"
+  }
+
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 0
+    }
   }
 
   tag {

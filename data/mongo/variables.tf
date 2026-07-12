@@ -18,3 +18,7 @@ variable "instance_type" {
 variable "cloudmap_service_id" {
   type = string
 }
+
+variable "ssm_parameter_name" {
+  type = string
+}
