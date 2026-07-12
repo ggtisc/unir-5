@@ -38,6 +38,10 @@ if [ -n "$VOLUME_ID" ] && [ "$VOLUME_ID" != "None" ]; then
   
   UUID=$(blkid -s UUID -o value "$FINAL_DEVICE")
   echo "UUID=$UUID /var/lib/mongodb xfs defaults,nofail 0 2" >> /etc/fstab
+
+  chown -R mongodb:mongodb /var/lib/mongodb
+  sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
+  systemctl restart mongod
 fi
 
 aws servicediscovery register-instance \

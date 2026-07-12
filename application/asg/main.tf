@@ -15,6 +15,13 @@ resource "aws_launch_template" "app_lt" {
     http_tokens = "required"
   }
 
+  user_data = base64encode(templatefile("${path.module}/scripts/init-app.sh", {
+    MONGO_URI      = "mongodb://mongo.internal:27017/social_events"
+    DB_USER        = "unir_user"
+    DB_PASSWORD    = "unir_password123"
+    DB_AUTH_SOURCE = "admin"
+  }))
+
   tags = {
     Name = "lt-iaas-1"
   }
