@@ -70,15 +70,6 @@ resource "aws_iam_policy" "app_s3_secrets_policy" {
         Action = [
           "ssm:GetParameter"
         ]
-        Resource = "arn:aws:ssm:*:*:parameter/iaas/mongo/db/*"
-      },
-      {
-        Sid    = "KMSDecryptionAccess"
-        Effect = "Allow"
-        Action = [
-          "kms:Decrypt"
-        ]
-        # Permite el uso de la llave administrada por AWS (alias/aws/ssm)
         Resource = "*"
       }
     ]

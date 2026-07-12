@@ -16,7 +16,7 @@ resource "aws_launch_template" "app_lt" {
   }
 
   user_data = base64encode(templatefile("${path.module}/scripts/init-app.sh", {
-    MONGO_URI      = "mongodb://iaas-mongo.iaas-dns:27017/social_events"
+    MONGO_URI = "mongodb://iaas-mongo.iaas-dns:27017/social_events"
   }))
 
   tags = {
