@@ -49,7 +49,7 @@ resource "aws_autoscaling_group" "app_asg" {
 
 resource "aws_autoscaling_policy" "cpu_policy" {
   name                   = "app-cpu-target-tracking-policy"
-  autoscaling_group_name = aws_autoscaling_group.app_asg.name  # Asegúrate de que este nombre coincida con tu recurso ASG
+  autoscaling_group_name = aws_autoscaling_group.app_asg.name
   policy_type            = "TargetTrackingScaling"
 
   target_tracking_configuration {

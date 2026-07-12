@@ -51,7 +51,7 @@ module "asg" {
   iam_instance_profile_name = module.iam.instance_profile_name
   target_group_arn          = module.alb.target_group_arn
   instance_type             = "t3.micro"
-  ssm_parameter_name = module.ssm.parameter_name
+  ssm_parameter_name        = module.ssm.parameter_name
 }
 
 # WAF Module
