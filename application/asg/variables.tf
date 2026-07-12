@@ -26,19 +26,19 @@ variable "target_group_arn" {
 variable "min_size" {
   description = "Minimum number of instances in the autoscaling group"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "max_size" {
   description = "Maximum number of instances in the autoscaling group"
   type        = number
-  default     = 2
+  default     = 3
 }
 
 variable "desired_capacity" {
   description = "Desired number of instances in the autoscaling group"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "private_subnet_ids" {

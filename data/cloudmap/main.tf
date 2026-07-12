@@ -1,15 +1,15 @@
-resource "aws_service_discovery_private_dns_namespace" "internal" {
-  name        = "internal"
+resource "aws_service_discovery_private_dns_namespace" "iaas_dns" {
+  name        = "iaas-dns"
   vpc         = var.vpc_id
   description = "Private namespace for service discovery"
 }
 
-resource "aws_service_discovery_service" "mongo" {
-  name        = "mongo"
+resource "aws_service_discovery_service" "iaas_mongo" {
+  name        = "iaas-mongo"
   description = "MongoDB service"
 
   dns_config {
-    namespace_id   = aws_service_discovery_private_dns_namespace.internal.id
+    namespace_id   = aws_service_discovery_private_dns_namespace.iaas_dns.id
     routing_policy = "MULTIVALUE"
 
     dns_records {
