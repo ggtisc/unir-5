@@ -40,7 +40,7 @@ module "alb" {
 
 module "ssm" {
   source         = "./ssm"
-  initial_ami_id = "ami-088b41ffb0933423f"
+  initial_ami_id = length(data.aws_ami_ids.app_ami.ids) > 0 ? data.aws_ami_ids.app_ami.ids[0] : var.fallback_app_ami_id
 }
 
 # ASG Module

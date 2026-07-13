@@ -5,7 +5,7 @@ module "cloudmap" {
 
 module "ssm" {
   source         = "./ssm"
-  initial_ami_id = "ami-024e6efaf93d85776" 
+  initial_ami_id = length(data.aws_ami_ids.mongo_ami.ids) > 0 ? data.aws_ami_ids.mongo_ami.ids[0] : var.fallback_mongo_ami_id
 }
 
 module "mongo" {
